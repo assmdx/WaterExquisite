@@ -6,10 +6,7 @@ const user = require('../../services/user.js');
 const app = getApp()
 Page({
   data: {    
-    floorGoods: [{
-      id:1,
-      name:"夏季服饰"
-    }],
+    floorGoods: [],
     banner:[], 
     goodList:[]   
   },
@@ -20,27 +17,15 @@ Page({
       path: '/pages/index/index'
     }
   },
-
   getIndexData: function () {
-    // let that = this;
-    // util.request(api.IndexUrl).then(function (res) {
-    //   //涉及微信登录
-    //   if (res.errno === 0) {
-    //     that.setData({          
-    //       floorGoods: res.data.categoryList
-    //       //?????????????涉及数据的定义和数据库的定义          
-    //     });
-    //   }
-    // });
-    util.makerequest(api.GoodsList).then(function (res){ 
-      let that = this; 
-      if(res.errno == 0) {
-        that.setData({
-          floorGoods:res.data.floorGoods,
-          banner:res.data.banner,
-          goodList:res.data
-        });
-      }    
+    let that = this;
+    util.makerequest(api.GoodsList).then(function (res){
+      console.log(res.data)                           
+      that.setData({
+        floorGoods:res.data.floorGoods,
+        banner:res.data.banner, 
+        goodList: res.data.goodList,     
+      });      
     }) 
   },
   onLoad: function (options) {
