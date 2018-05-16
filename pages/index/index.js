@@ -19,13 +19,16 @@ Page({
   },
   getIndexData: function () {
     let that = this;
-    util.makerequest(api.GoodsList).then(function (res){
-      console.log(res.data)                           
-      that.setData({
-        floorGoods:res.data.floorGoods,
-        banner:res.data.banner, 
-        goodList: res.data.goodList,     
-      });      
+    util.makerequest(api.IndexUrl).then(function (res){
+      // console.log('res.data is')
+      // console.log(res.data)      
+      if (res.data.errno === 0) {
+        that.setData({
+          floorGoods: res.data.data.floorGoods,
+          banner: res.data.data.banner,
+          goodList: res.data.data.goodList,
+        });      
+      }                                 
     }) 
   },
   onLoad: function (options) {

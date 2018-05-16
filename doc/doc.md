@@ -18,7 +18,7 @@
       goods: {},//商品的具体细节，名字，价格等
       gallery: [],//图片轮播
       attribute: [],//商品参数 [{name,value}]
-      info:{}            
+      info:{}   //info.good_desc 为商品介绍的html代码        
       specificationList: [],
       productList: [],
       relatedGoods: [],
@@ -38,9 +38,10 @@
       good_id,
       good_num(购买的数量)
     }
-    banner{//热门商品
-      goodidList[]
-    }
+    user{
+      userInfo:
+      phoneNumber:
+    }    
   本地
     history{
       uerid，

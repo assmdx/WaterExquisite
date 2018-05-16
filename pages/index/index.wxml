@@ -17,10 +17,10 @@
     <view class="b">
       <block wx:for="{{goodList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="{{iitem.id}}">
         <view class="item {{iindex % 2 == 0 ? '' : 'item-b'}}">
-          <navigator url="../goods/goods?id={{iitem.id}}" class="a">
-            <image class="img" src="{{iitem.imgUrl}}" background-size="cover"></image>
-            <text class="name">{{iitem.name}}</text>
-            <text class="price">￥{{iitem.price}}</text>
+          <navigator url="../goods/goods?id={{goodList[iindex]._id}}" class="a">
+            <image class="img" src="{{goodList[iindex].gallery[0]}}" background-size="cover"></image>
+            <text class="name">{{iitem.info.name}}</text>
+            <text class="price">￥{{iitem.info.goods_retail_price}}</text>
           </navigator>
         </view>
       </block>      

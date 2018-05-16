@@ -33,7 +33,7 @@ function request(url, data = {}, method = "GET") {
       },
       success: function (res) {
         console.log("success");
-
+        console.log(res.data)
         if (res.statusCode == 200) {
 
           if (res.data.errno == 401) {
@@ -76,7 +76,7 @@ function request(url, data = {}, method = "GET") {
     })
   });
 }
-function makerequest(url,data={},method="GET"){
+function makerequest(url,data={},method="POST"){
   return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
