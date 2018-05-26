@@ -7,10 +7,13 @@ module.exports = {
 
 	CartCheckout: ApiRootUrl + 'cart/checkout', // 下单前信息确认
 	OrderSubmit: ApiRootUrl + 'order/submit', // 提交订单
-  	PayPrepayId: ApiRootUrl + 'pay/prepay', //获取微信统一下单prepay_id
+  PayPrepayId: ApiRootUrl + 'pay/prepay', //获取微信统一下单prepay_id
+  
+  CollectList: ApiRootUrl + 'collect/list',  //收藏列表
+  CollectAddOrDelete: ApiRootUrl + 'collect/addordelete',  //添加或取消收藏
 
-  	OrderList: ApiRootUrl + 'order/list',  //订单列表
-  	OrderDetail: ApiRootUrl + 'order/detail',  //订单详情
-  	OrderCancel: ApiRootUrl + 'order/cancel',  //取消订单  
+  OrderList: ApiRootUrl + 'order/list',  //订单列表
+  OrderDetail: ApiRootUrl + 'order/detail',  //订单详情
+  OrderCancel: ApiRootUrl + 'order/cancel',  //取消订单  
   	
 };

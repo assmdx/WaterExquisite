@@ -69,6 +69,53 @@ Page({
       });
     }
   },
+  closeAttrOrCollect: function () {
+    let that = this;
+    console.log(this.data.openAttr)
+    if (this.data.openAttr) {
+      this.setData({
+        openAttr: false, 
+      });
+      if (that.data.userHasCollect == 1) {
+        that.setData({
+          'collectBackImage': that.data.hasCollectImage
+        });
+      } else {
+        that.setData({
+          'collectBackImage': that.data.noCollectImage
+        });
+      }
+    } 
+    else 
+    {
+      //添加或是取消收藏
+      util.makerequest(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id, userInfo:'5afa9bc51e4aa31dd895d562' }, "POST")
+        .then(function (res) {
+          console.log(res)
+          let _res = res;
+          if (_res.data.errno == 0) {
+            if (_res.data.data.type == 'add') {
+              that.setData({
+                'collectBackImage': that.data.hasCollectImage
+              });
+            } else {
+              that.setData({
+                'collectBackImage': that.data.noCollectImage
+              });
+            }
+
+          } else {
+            wx.showToast({
+              image: '/static/images/icon_error.png',
+              title: _res.errmsg,
+              mask: true
+            });
+          }
+
+        });
+    }
+
+  },
   cutNumber: function () {
     this.setData({
       number: (this.data.number - 1 > 1) ? this.data.number - 1 : 1

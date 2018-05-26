@@ -1,8 +1,11 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/ucenter/index/index",
-    "pages/goods/goods"    
+    "pages/goods/goods",
+    "pages/ucenter/index/index",    
+    "pages/ucenter/order/order",
+    "pages/ucenter/collect/collect",
+    "pages/ucenter/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "dark",
