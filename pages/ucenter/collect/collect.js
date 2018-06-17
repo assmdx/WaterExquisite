@@ -10,12 +10,13 @@ Page({
   },
   getCollectList() {
     let that = this;
-    util.request(api.CollectList, { typeId: that.data.typeId }).then(function (res) {
-      if (res.errno === 0) {
-        console.log(res.data);
+    util.makerequest(api.CollectList, { userInfo: "5afa9bc51e4aa31dd895d562" }).then(function (res) {
+      console.log(res)
+      if (res.data.errno === 0) {
+        console.log(res.data.data);
         that.setData({
           collectList: res.data.data
-        });
+        }); 
       }
     });
   },

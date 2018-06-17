@@ -4,8 +4,7 @@
     "pages/goods/goods",
     "pages/ucenter/index/index",    
     "pages/ucenter/order/order",
-    "pages/ucenter/collect/collect",
-    "pages/ucenter/orderDetail/orderDetail"
+    "pages/ucenter/collect/collect"    
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -13,22 +13,48 @@
 
 ## 数据库
 	good{
-		id,
-		name,
-		img,
-		content,
-		price
+		info: {
+        goods_desc: String,
+        name: String,
+        goods_retail_price: Number
+    },
+    gallery: [String],
+    attribute: [String],
+    specificationList: [{
+        specification_id: String,
+        name: String,
+        valueList: [{
+            id: String,
+            value: String
+        }]
+    }],
+    number: Number,
 	}			
 	order{
 		wxname(微信号),
-		orderhash(唯一标识这一次order),
-		good_id,
-		good_num(购买的数量)
+		orderh_sn(唯一标识这一次order),
+    order_status_text,
+    actual_price,//实付款
+    goodList:{
+      id,
+      list_pic_url,
+      name,
+      number      
+    }          
+    handleOption:{
+      pay:true或者false
+    }
+		//good_id,
+		//good_num(购买的数量)
 	}
-	history{
-	    userid,
-	    good_id
-	}
+  collect{
+    list_pic_url,
+    name,
+    goods_brief,
+    retail_price,
+    goodId,
+    userId,
+  }	
 	banner{
 	    imgUrl[]
 	}

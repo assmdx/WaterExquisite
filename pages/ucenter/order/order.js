@@ -12,8 +12,8 @@ Page({
   },
   getOrderList() {
     let that = this;
-    util.request(api.OrderList).then(function (res) {
-      if (res.errno === 0) {
+    util.makerequest(api.OrderList, { userInfo: '5b1738869c4de44938b7f033' }).then(function (res) {
+      if (res.data.errno === 0) {
         console.log(res.data);
         that.setData({
           orderList: res.data.data
