@@ -12,11 +12,11 @@ Page({
   },
   getOrderList() {
     let that = this;
-    util.makerequest(api.OrderList, { userInfo: '5b1738869c4de44938b7f033' }).then(function (res) {
-      if (res.data.errno === 0) {
+    util.request(api.OrderList, { userInfo: '5b1738869c4de44938b7f033' },'POST').then(function (res) {
+      if (res.errno === 0) {
         console.log(res.data);
         that.setData({
-          orderList: res.data.data
+          orderList: res.data
         });
       }
     });

@@ -10,12 +10,12 @@ Page({
   },
   getCollectList() {
     let that = this;
-    util.makerequest(api.CollectList, { userInfo: "5afa9bc51e4aa31dd895d562" }).then(function (res) {
+    util.request(api.CollectList, { userInfo: "5afa9bc51e4aa31dd895d562" },'POST').then(function (res) {
       console.log(res)
-      if (res.data.errno === 0) {
-        console.log(res.data.data);
+      if (res.errno === 0) {
+        console.log(res.data);
         that.setData({
-          collectList: res.data.data
+          collectList: res.data
         }); 
       }
     });
@@ -39,8 +39,10 @@ Page({
   openGoods(event) {
 
     let that = this;
-    let goodsId = this.data.collectList[event.currentTarget.dataset.index].value_id;
-
+    let userInfo = this.data.collectList[event.currentTarget.dataset.index].user; 
+    let goodsId = this.data.collectList[event.currentTarget.dataset.index].good;
+    console.log('collect value index is', event.currentTarget.dataset.index)
+    console.log('value_id id', this.data.collectList[event.currentTarget.dataset.index].good)
     //触摸时间距离页面打开的毫秒数  
     var touchTime = that.data.touch_end - that.data.touch_start;
     console.log(touchTime);
@@ -51,8 +53,7 @@ Page({
         content: '确定删除吗？',
         success: function (res) {
           if (res.confirm) {
-
-            util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId }, 'POST').then(function (res) {
+            util.request(api.CollectAddOrDelete, { userInfo: userInfo, valueId: goodsId },'POST').then(function (res) {
               if (res.errno === 0) {
                 console.log(res.data);
                 wx.showToast({

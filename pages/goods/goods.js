@@ -23,19 +23,19 @@ Page({
   },
   getGoodsInfo:function(){
     let that = this;
-    util.makerequest(api.GoodsDetail,{id:that.data.id}).then(function(res){
-      if (res.data.errno === 0) {
+    util.request(api.GoodsDetail,{id:that.data.id},'POST').then(function(res){
+      if (res.errno === 0) {
         console.log('res.data is :' + res.data)
         that.setData({
-          goods: res.data.data[0].info,
-          gallery: res.data.data[0].gallery,
-          attribute: res.data.data[0].attribute,
-          brand: res.data.data[0].brand,
-          specificationList: res.data.data[0].specificationList,
-          productList: res.data.data[0].productList,
-          userHasCollect: res.data.data[0].userHasCollect
+          goods: res.data[0].info,
+          gallery: res.data[0].gallery,
+          attribute: res.data[0].attribute,
+          brand: res.data[0].brand,
+          specificationList: res.data[0].specificationList,
+          productList: res.data[0].productList,
+          userHasCollect: res.data[0].userHasCollect
         });
-        WxParse.wxParse('goodsDetail', 'html', res.data.data[0].info.goods_desc, that);
+        WxParse.wxParse('goodsDetail', 'html', res.data[0].info.goods_desc, that);
       }
     });
   },  
@@ -87,14 +87,14 @@ Page({
       }
     } 
     else 
-    {
+    {      
       //添加或是取消收藏
-      util.makerequest(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id, userInfo:'5afa9bc51e4aa31dd895d562' }, "POST")
+      util.request(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id}, "POST")
         .then(function (res) {
           console.log(res)
           let _res = res;
-          if (_res.data.errno == 0) {
-            if (_res.data.data.type == 'add') {
+          if (_res.errno == 0) {
+            if (_res.data.type == 'add') {
               that.setData({
                 'collectBackImage': that.data.hasCollectImage
               });
@@ -107,7 +107,7 @@ Page({
           } else {
             wx.showToast({
               image: '/static/images/icon_error.png',
-              title: _res.errmsg,
+              title: _res.errMes,
               mask: true
             });
           }

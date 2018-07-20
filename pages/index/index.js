@@ -19,20 +19,43 @@ Page({
   },
   getIndexData: function () {
     let that = this;
-    util.makerequest(api.IndexUrl).then(function (res){
+    util.request(api.IndexUrl,{},'POST').then(function (res){
       // console.log('res.data is')
       // console.log(res.data)      
-      if (res.data.errno === 0) {
+      if (res.errno === 0) {
         that.setData({
-          floorGoods: res.data.data.floorGoods,
-          banner: res.data.data.banner,
-          goodList: res.data.data.goodList,
+          floorGoods: res.data.floorGoods,
+          banner: res.data.banner,
+          goodList: res.data.goodList,
         });      
       }                                 
     }) 
   },
   onLoad: function (options) {
-    this.getIndexData();
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          // wx.getUserInfo({
+          //   success: res => {
+          //     console.log(1)
+          //     console.log(res.userInfo)
+          //     // 可以将 res 发送给后台解码出 unionId
+          //     this.setData({
+          //       webUserData: res.userInfo
+          //     })
+          //   }
+
+          // })
+          this.getIndexData();
+        }
+        else{
+          wx.redirectTo({
+            url: 'login/login'
+          })
+        }
+      }
+    })    
   },
   onReady: function () {
     // 页面渲染完成

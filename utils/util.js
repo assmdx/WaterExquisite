@@ -29,13 +29,11 @@ function request(url, data = {}, method = "GET") {
       method: method,
       header: {
         'Content-Type': 'application/json',
-        'X-Nideshop-Token': wx.getStorageSync('token')
+        'X-WaterExquisite-Token': wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log("success");
-        console.log(res.data)
-        if (res.statusCode == 200) {
-
+        console.log("success");                
+        if (res.statusCode == 200) {          
           if (res.data.errno == 401) {
             //需要登录后才可以操作
 
@@ -44,14 +42,18 @@ function request(url, data = {}, method = "GET") {
               code = res.code;
               return getUserInfo();
             }).then((userInfo) => {
-              //登录远程服务器
+              //登录远程服务器              
               request(api.AuthLoginByWeixin, { code: code, userInfo: userInfo }, 'POST').then(res => {
                 if (res.errno === 0) {
                   //存储用户信息
                   wx.setStorageSync('userInfo', res.data.userInfo);
                   wx.setStorageSync('token', res.data.token);
 
-                  resolve(res);
+                  request(url,data,method).then(res=>{
+                    resolve(res)
+                  }).catch(e=>{
+                    reject(e)
+                  })
                 } else {
                   reject(res);
                 }
@@ -59,6 +61,7 @@ function request(url, data = {}, method = "GET") {
                 reject(err);
               });
             }).catch((err) => {
+              console.error('error happened in getUserInfo',err);
               reject(err);
             })
           } else {
@@ -76,28 +79,7 @@ function request(url, data = {}, method = "GET") {
     })
   });
 }
-function makerequest(url,data={},method="POST"){
-  return new Promise(function (resolve, reject) {
-    wx.request({
-      url: url,
-      data:data,
-      method:method,
-      header:{
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        console.log("success");
-        if (res.statusCode == 200) {
-          resolve(res);
-        }
-      },
-      fail: function (err) {
-        console.log("failed");
-        reject(err);
-      }
-    });
-  });
-}
+
 /**
  * 检查微信会话是否过期
  */
@@ -123,7 +105,7 @@ function login() {
       success: function (res) {
         if (res.code) {
           //登录远程服务器
-          console.log(res)
+          console.log(res)     
           resolve(res);
         } else {
           reject(res);
@@ -176,7 +158,6 @@ function showErrorToast(msg) {
 module.exports = {
   formatTime,
   request,
-  makerequest,
   redirect,
   showErrorToast,
   checkSession,
