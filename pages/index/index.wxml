@@ -18,7 +18,7 @@
       <block wx:for="{{goodList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="{{iitem.id}}">
         <view class="item {{iindex % 2 == 0 ? '' : 'item-b'}}">
           <navigator url="../goods/goods?id={{goodList[iindex]._id}}" class="a">
-            <image class="img" src="{{goodList[iindex].gallery[0]}}" background-size="cover"></image>
+            <image class="img" src="{{goodList[iindex].thumb}}" background-size="cover"></image>
             <text class="name">{{iitem.info.name}}</text>
             <text class="price">￥{{iitem.info.goods_retail_price}}</text>
           </navigator>

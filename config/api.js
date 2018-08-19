@@ -1,4 +1,5 @@
-const ApiRootUrl = 'http://127.0.0.1:7001/WaterExquisite_api/';
+//const ApiRootUrl ='https://www.ilovegirl.top/WaterExquisite_api/';
+const ApiRootUrl = 'http://127.0.0.1:8360/WaterExquisite_api/';
 module.exports = {
   IndexUrl: ApiRootUrl + 'index/index', //首页数据接口
 	AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin', //微信登录

@@ -25,9 +25,22 @@ Page({
       if (res.errno === 0) {
         that.setData({
           floorGoods: res.data.floorGoods,
-          banner: res.data.banner,
+          banner: [{
+            id: 0,
+            imgUrl: 'http://zheli.org/data/20180812141227.jpg'
+          },
+          {
+            id: 1,
+            imgUrl: 'http://zheli.org/data/20180812141503.png'
+          },
+          {
+            id: 2,
+            imgUrl: 'http://zheli.org/data/20180812141617.png'
+          }
+          ],
           goodList: res.data.goodList,
-        });      
+        });
+
       }                                 
     }) 
   },
